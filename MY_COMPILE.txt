@@ -1,0 +1,24 @@
+
+INCLUDE  = -I /home/ganesh/Cvm/CLM/core/include
+INCLUDE += -I /home/ganesh/Cvm/CLM/core/include/internal
+INCLUDE += -I /home/ganesh/Public/FFMPEG_SRC/x86_32/include   
+INCLUDE += -I /home/ganesh/Public/Sqlite3/include
+
+FFMPEG_LIB = /home/ganesh/Public/FFMPEG_SRC/x86_32/lib   
+SQLITE_LIB = /home/ganesh/Public/Sqlite3/lib   
+
+
+Test:
+	gcc cnc_dmsClmUnitTest.c -I./ $(INCLUDE) -L $(FFMPEG_LIB) -lavformat -lavutil -lavcodec -L ./ -L $(SQLITE_LIB) -lcncTrace -lCncDmsClm -o cnc_dmsClmUnitTest.out -m32 -g -lsqlite3
+
+
+CLM:
+	gcc cnc_dmsClm.c cnc_dmsDb.c cnc_softdemuxer_helper.c -I./ $(INCLUDE) -L ./ -L$(SQLITE_LIB) -L$(FFMPEG_LIB) -lcncTrace -shared -o libCncDmsClm.so -m32 -g -lsqlite3 -lavformat -lavutil -lavcodec
+ 
+
+Clean:
+	echo ""
+
+#/home/ganesh/CONTENT_SHARE/ALLFORMATS_TestStreams/CRISP_DMR_Sanity
+
+#-fno-stack-protector

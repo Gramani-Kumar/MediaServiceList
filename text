@@ -1,0 +1,19 @@
+i) Use x86 based cncTrace.so
+
+ii) Compile MFD related source file to generate libcncdemuxprobe.so 
+
+gcc cnc_softdemuxer_helper.c -I/home/caveo/tmp/MiniDLNA/x86_bin/ffmpeg_x86/include -I/home/caveo/Dhod/crisp/trunk/core/include/ -I/home/caveo/Dhod/crisp/trunk/core/include/internal -I/home/caveo/tmp/MiniDLNA/x86_bin/ffmpeg_x86/HS_UnitTest/cncClmWithMfd -L/home/caveo/tmp/MiniDLNA/x86_bin/ffmpeg_x86/ -lavformat -lavutil -L/home/caveo/tmp/MiniDLNA/x86_bin/ffmpeg_x86/HS_UnitTest -lcncTrace -shared  -o  libcncdemuxprobe.so
+
+iii) Compile CLM related source files to generate libCncDmsClm.so:w
+
+
+gcc cnc_dmsClm.c -I.  -I/home/caveo/Dhod/crisp/trunk/crisprelease/core/include/  -I/home/caveo/Dhod/crisp/trunk/crisprelease/core/include/internal -L/home/caveo/tmp/MiniDLNA/x86_bin/ffmpeg_x86/HS_UnitTest/cncClmWithMfd -lcncdemuxprobe -lcncTrace -shared -o libCncDmsClm.so
+
+iv) To Compile cnc_dmsClmUnitTest.c
+
+a)export ffmpeg library path and PWD
+ export LD_LIBRARY_PATH=/home/caveo/tmp/MiniDLNA/x86_bin/ffmpeg_x86/HS_UnitTest/cncClmWithMfd:/home/caveo/tmp/MiniDLNA/x86_bin/ffmpeg_x86/
+ 
+b)
+ gcc cnc_dmsClmUnitTest.c -I. -I/home/caveo/Dhod/crisp/trunk/crisprelease/core/include/ -I/home/caveo/Dhod/crisp/trunk/crisprelease/core/include/internal -L/home/caveo/tmp/MiniDLNA/x86_bin/ffmpeg_x86/ -lavformat -lavutil -L/home/caveo/tmp/MiniDLNA/x86_bin/ffmpeg_x86/HS_UnitTest/cncClmWithMfd/ -lcncTrace -lcncdemuxprobe -lCncDmsClm -o cnc_dmsClmUnitTest.out
+ 
